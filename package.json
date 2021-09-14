@@ -1,0 +1,11 @@
+{
+  "name": "number_systems",
+  "version": "1.0.0",
+  "description": "",
+  "main": "conversions.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lucky Jones Uayan",
+  "license": "MIT"
+}
