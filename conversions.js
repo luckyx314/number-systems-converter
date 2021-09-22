@@ -1,6 +1,6 @@
 let x = {
     type: 'hexadecimal',
-    data: "abcd.FA"
+    data: "abcd"
 };
 
 
@@ -23,21 +23,23 @@ function separateMSDandLSD(given) {
     const LSDpattern = /[.]\w+/i
 
     const MSD = lowercasedGiven.match(MSDpattern)[0]
-    const LSD = lowercasedGiven.match(LSDpattern)[0].replace('.', '')
 
-    array.push(MSD, LSD)
-
+    if (array.length > 2) {
+        const LSD = lowercasedGiven.match(LSDpattern)[0].replace('.', '')
+        array.push(MSD, LSD)
+    } else {
+        array.push(MSD)
+    }
     return array
 }
 
 
 function convertHexToDeci(arr) {
+    // hexadecimal to decimal conversion
+    
+    // Most Significant Digits = MSD
     const MSD = arr[0].split('');
-    const LSD = arr[1].split('');
-
     let msdArr = [];
-    let lsdArr = [];
-
     MSD.forEach(char => {
         if (hexToDeci[char]) {
             msdArr.push(hexToDeci[char])
@@ -46,47 +48,61 @@ function convertHexToDeci(arr) {
         }
     })
 
+    let msdExponents = [];
+    for (let i=msdArr.length - 1; i >= 0; i--) {
+        msdExponents.push(Math.pow(16, i))
+    }
 
-    LSD.forEach(char => {
-        if (hexToDeci[char]) {
-            lsdArr.push(hexToDeci[char])
-        } else {
-            lsdArr.push(Number(char))
-        }
-    })
+    msdArr.push(msdExponents)
 
-    console.log(msdArr)
-    console.log(lsdArr)
+    let finalMSDArr = [];
+    for (let i=0; i < msdArr.length; i++) {
+        for (let j=0; j < msdArr[i].length; j++) {
+            finalMSDArr.push(msdArr[i][j] * msdArr[j])
+        } 
+    }
 
+    let finalMSD = finalMSDArr.reduce((total, value) => total + value);
+
+    // Least Significant Digits = LSD
+
+    let finalLSD;
+    if (arr.length > 1) {
+        const LSD = arr[1].split('');
+
+        let lsdArr = [];
+        LSD.forEach(char => {
+            if (hexToDeci[char]) {
+                lsdArr.push(hexToDeci[char])
+            } else {
+                lsdArr.push(Number(char))
+            }
+        })
     
+        let lsdExponents = [];
+        for (let i=1; i <= lsdArr.length; i++) {
+            lsdExponents.push(Math.pow(16, -i))
+        }
+    
+        lsdArr.push(lsdExponents)
+        
+        let finalLSDArr = [];
+        for (let i=0; i < lsdArr.length; i++) {
+            for (let j=0; j < lsdArr[i].length; j++) {
+                finalLSDArr.push(lsdArr[i][j] * lsdArr[j])
+            }
+        }
+
+        finalLSD = finalLSDArr.reduce((total, value) => total + value)
+    }
+    
+
+    if (arr.length > 1) {
+        return finalMSD + finalLSD;
+    } else {
+        return finalMSD;
+    }
+
 }
 
-convertHexToDeci(givenArray)
-
-
-
-    // lowercasedGiven.split('').forEach(char => {
-    //     if (!hexToDeci[char]) {
-    //         MSD.push(Number(char))
-    //     } else if (hexToDeci[char]) {
-    //         MSD.push(hexToDeci[char])
-    //     }
-    // })
-
-    // let exponents = []
-
-    // for (let i = MSD.length - 1; i >= 0; i--) {
-    //     // console.log('exponent', Math.pow(16, i))
-    //     exponents.push(Math.pow(16, i))
-    // }
-
-    // MSD.push(exponents)
-
-    // let final = [];
-    // for (let i=0; i < MSD.length; i++) {
-    //     for (let j = 0; j < MSD[i].length; j++) {
-    //         final.push(MSD[i][j] * MSD[j])
-    //     }
-    // }
-
-    // console.log(final.reduce((total, value) => total + value))
+console.log(convertHexToDeci(givenArray))
