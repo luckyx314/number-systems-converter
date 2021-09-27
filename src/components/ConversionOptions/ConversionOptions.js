@@ -1,17 +1,16 @@
 import React, {useState, useContext} from 'react'
 import "./ConversionOptions.css"
-import {NumberSystemContext} from '../../Context/NumberTypeContext'
+import {NumberSystemContext} from '../../Context/NumberSystemContext'
 
 const ConversionOptions = () => {
-    const setInitialSystemType = useContext(NumberSystemContext);
-    const setFinalSystemType = useContext(NumberSystemContext);
+    const [systemType, setSystemType] = useContext(NumberSystemContext);
 
     return (
         <div className="conversionOptions">
                 <div className="fromBaseN">
                     <p>From</p>
                     <select
-                        onClick={(e) => setInitialSystemType[1](e.target.value)}
+                        onClick={(e) => setSystemType({...systemType, initialSystemType: e.target.value})}
                     >
                         <option value="binary">Binary</option>
                         <option value="decimal">Decimal</option>
@@ -22,10 +21,10 @@ const ConversionOptions = () => {
                 <div className="toBaseN">
                     <p>To</p>
                     <select
-                        onClick={(e) => setFinalSystemType[1](e.target.value)}
+                        onClick={(e) => setSystemType({...systemType, finalSystemType: e.target.value})}
                     >
-                        <option value="binary">Binary</option>
                         <option value="decimal">Decimal</option>
+                        <option value="binary">Binary</option>
                         <option value="hexadecimal">Hexadecimal</option>
                         <option value="octal">Octal</option>
                     </select>

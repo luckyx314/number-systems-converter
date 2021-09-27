@@ -1,9 +1,9 @@
 import React, {useContext} from 'react'
 import "./Arithmetic.css"
-import {NumberSystemContext} from '../../Context/NumberTypeContext'
+import {NumberSystemContext} from '../../Context/NumberSystemContext'
 
 const Arithmetic = () => {
-    const [initialSystemType] = useContext(NumberSystemContext);
+    const [systemType] = useContext(NumberSystemContext);
 
     return (
         <div className="arithmeticContainer">
@@ -24,7 +24,7 @@ const Arithmetic = () => {
             <input type="text" />
             <p>Result</p>
             <div className="arithmeticResultContainer">
-                <div className="arithmeticResult">{initialSystemType}</div>
+                <div className="arithmeticResult">{systemType.initialSystemType}</div>
                 <div className="arithmeticResultBase">10</div>
             </div>
         </div>

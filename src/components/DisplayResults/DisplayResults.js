@@ -1,45 +1,23 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import "./DisplayResults.css"
+import {ConversionResultContext} from "../../Context/ConversionResultsContext"
 
 const DisplayResults = () => {
+    const [conversionResults] = useContext(ConversionResultContext)
+    
     return (
         <div className="displayResultsContainer">
-            <div>
-                <p>Binary Number</p>
-                <div className="conversionResultContainer">
-                    <div className="conversionResult">
-                        10101010101
+            {conversionResults.map(result => (
+                <div key={result.type}>
+                    <p>{result.type} Number</p>
+                    <div className="conversionResultContainer">
+                        <div className="conversionResult">
+                            {result.data}
+                        </div>
+                        <div className="conversionResultBase">{result.base}</div>
                     </div>
-                    <div className="conversionResultBase">2</div>
                 </div>
-            </div>
-            <div>
-                <p>Hex Number</p>
-                <div className="conversionResultContainer">
-                    <div className="conversionResult">
-                        FAB123
-                    </div>
-                    <div className="conversionResultBase">16</div>
-                </div>
-            </div>
-            <div>
-                <p>Octal Number</p>
-                <div className="conversionResultContainer">
-                    <div className="conversionResult">
-                        137.5
-                    </div>
-                    <div className="conversionResultBase">8</div>
-                </div>
-            </div>
-            <div>
-                <p>Decimal Number</p>
-                <div className="conversionResultContainer">
-                    <div className="conversionResult">
-                        137.5
-                    </div>
-                    <div className="conversionResultBase">10</div>
-                </div>
-            </div>
+            ))}
         </div>
     )
 }

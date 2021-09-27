@@ -49,6 +49,7 @@ p {
   color: rgb(122, 111, 111);
   font-weight: bold;
   font-size: .8rem;
+  text-transform: capitalize;
 }
 
 .conversionResultContainer,

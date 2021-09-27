@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext, useState} from 'react'
 import "./Conversions.css"
 import MainInputBar from '../MainInputBar/MainInputBar'
 import NumberBtns from '../NumberBtns/NumberBtns'
@@ -6,10 +6,29 @@ import DisplayResults from '../DisplayResults/DisplayResults'
 import Arithmetic from '../Arithmetic/Arithmetic'
 import ConversionOptions from '../ConversionOptions/ConversionOptions'
 
+import {NumberSystemContext} from '../../Context/NumberSystemContext'
+
 const Conversions = () => {
-    
+    const [systemType] = useContext(NumberSystemContext);
+
     const handleConvert = () => {
-        console.log('convert')
+        if (systemType.finalSystemType === 'decimal') {
+            switch (systemType.initialSystemType) {
+                case 'binary':
+                    console.log('binary to decimal');
+                    break
+                case 'hexadecimal':
+                    console.log('hexadecimal to decimal');
+                    break
+                case 'octal':
+                    console.log('octal to decimal');
+                    break
+                default:
+                    return
+            }
+        } else {
+            console.log(false)
+        }
     }
     const handleReset = () => {
         console.log('reset')
