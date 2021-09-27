@@ -1,11 +1,14 @@
 {
   "name": "number_systems",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is a calculator I made for my course, CSIT111 - Intro to Computing",
   "main": "conversions.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Lucky Jones Uayan",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "nodemon": "^2.0.12"
+  }
 }

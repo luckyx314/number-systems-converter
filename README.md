@@ -1,4 +1,5 @@
-# Number-Systems-Conversion
-Number Systems Conversion
+# CSIT111 - Intro to Computing Calculator
 
-The main purpose of this project is so that I can answer my examination in CSIT111 - Intro To Computing with ease.
+## Number Systems Conversion
+This is a project I made for my upcoming exam for CSIT111. This calculator will help me convert number systems efficiently.
+Our instructor allowed us to use a calculator but didn't specify what type, so, I custom-made my own.
