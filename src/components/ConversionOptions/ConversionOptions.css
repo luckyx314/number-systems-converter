@@ -1,0 +1,8 @@
+.conversionOptions {
+    display: flex;
+    margin: 10px 0;
+}
+
+.conversionOptions div {
+    margin-right: 10px;
+}

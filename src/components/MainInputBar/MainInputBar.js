@@ -1,6 +1,6 @@
 import React from 'react'
 
-const BinaryToDeci = () => {
+const MainInputBar = () => {
     return (
         <div>
             <input type="text"/>
@@ -8,4 +8,4 @@ const BinaryToDeci = () => {
     )
 }
 
-export default BinaryToDeci
+export default MainInputBar

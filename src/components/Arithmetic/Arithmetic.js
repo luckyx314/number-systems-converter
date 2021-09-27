@@ -1,7 +1,10 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import "./Arithmetic.css"
+import {NumberSystemContext} from '../../Context/NumberTypeContext'
 
 const Arithmetic = () => {
+    const [initialSystemType] = useContext(NumberSystemContext);
+
     return (
         <div className="arithmeticContainer">
             <div className="arithmeticOptionsContainer">
@@ -21,8 +24,8 @@ const Arithmetic = () => {
             <input type="text" />
             <p>Result</p>
             <div className="arithmeticResultContainer">
-                <div className="arithmeticResult">12342</div>
-                <div className="arithmeticResultBase">2</div>
+                <div className="arithmeticResult">{initialSystemType}</div>
+                <div className="arithmeticResultBase">10</div>
             </div>
         </div>
     )

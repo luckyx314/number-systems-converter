@@ -1,38 +1,37 @@
 import React from 'react'
 import "./Conversions.css"
-import BinaryToDeci from '../BinaryToDeci/BinaryToDeci'
+import MainInputBar from '../MainInputBar/MainInputBar'
 import NumberBtns from '../NumberBtns/NumberBtns'
 import DisplayResults from '../DisplayResults/DisplayResults'
 import Arithmetic from '../Arithmetic/Arithmetic'
+import ConversionOptions from '../ConversionOptions/ConversionOptions'
 
 const Conversions = () => {
+    
+    const handleConvert = () => {
+        console.log('convert')
+    }
+    const handleReset = () => {
+        console.log('reset')
+    }
+    const handleSwap = () => {
+        console.log('swap')
+    }
+
     return (
         <div className="conversionsContainer">
-            <div className="conversionOptions">
-                <div className="fromBaseN">
-                    <p>From</p>
-                    <select>
-                        <option value="binary">Binary</option>
-                        <option value="decimal">Decimal</option>
-                        <option value="hexadecimal">Hexadecimal</option>
-                        <option value="octal">Octal</option>
-                    </select>
-                </div>
-                <div className="toBaseN">
-                    <p>To</p>
-                    <select>
-                        <option value="binary">Binary</option>
-                        <option value="decimal">Decimal</option>
-                        <option value="hexadecimal">Hexadecimal</option>
-                        <option value="octal">Octal</option>
-                    </select>
-                </div>
-            </div>
-            <BinaryToDeci />
+            <ConversionOptions />
+            <MainInputBar />
             <div className="btnsContainer">
-                <button>= Convert</button>
-                <button>&times; Reset</button>
-                <button>Swap</button>
+                <button
+                    onClick={() => handleConvert()}
+                >= Convert</button>
+                <button
+                    onClick={() => handleReset()}
+                >&times; Reset</button>
+                <button
+                    onClick={() => handleSwap()}
+                >Swap</button>
             </div>
 
             <div className="conversionDetails">
