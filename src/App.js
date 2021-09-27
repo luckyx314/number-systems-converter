@@ -1,10 +1,10 @@
 import './App.css';
-import InputBar from './components/BinaryToDeci/BinaryToDeci';
+import Conversions from './components/Conversions/Conversions';
 
 function App() {
   return (
     <div className="App">
-        <InputBar />
+      <Conversions />
     </div>
   );
 }
