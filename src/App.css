@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: rgb(44, 43, 43);
+}
+
 div.App {
   padding: 10px;
 }

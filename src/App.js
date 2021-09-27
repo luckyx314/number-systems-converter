@@ -1,5 +1,5 @@
 import './App.css';
-import InputBar from './components/InputBar/InputBar';
+import InputBar from './components/BinaryToDeci/BinaryToDeci';
 
 function App() {
   return (
