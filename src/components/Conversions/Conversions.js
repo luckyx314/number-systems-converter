@@ -14,7 +14,7 @@ import {MainInputContext} from '../../Context/MainInputContext'
 import {ConversionResultContext} from '../../Context/ConversionResultsContext'
 
 // my modules
-import {BinaryToDecimal} from "../logic/NumberSystemClass"
+import {BinaryToDecimal, HexToDecimal, OctalToDecimal} from "../logic/toDecimal"
 
 const Conversions = () => {
     const [systemType] = useContext(NumberSystemContext);

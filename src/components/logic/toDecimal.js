@@ -16,7 +16,7 @@ class NumberSystem {
         if (this.data) {
             const given = this.data;
             const msdPattern = /\w+/
-            const lsdPattern = /[.]\w+/
+            const lsdPattern = /[.]\w+/ 
             
             const MSD = given.match(msdPattern)[0].split('');
 
@@ -43,14 +43,28 @@ class NumberSystem {
             let msd;
             let lsd;
             const checkFraction = typeof this.getMsdAndLsd()[1] === 'object';
+            const notHex = this.numberSystem !== 'hexadecimal';
 
             if (checkFraction) {
-                msd = this.getMsdAndLsd()[0].map(num => Number(num));
-                lsd = this.getMsdAndLsd()[1].map(num => Number(num));
+                if (notHex) {
+                    msd = this.getMsdAndLsd()[0].map(num => Number(num));
+                    lsd = this.getMsdAndLsd()[1].map(num => Number(num));
+                } else {
+                    msd = this.getHexMsdAndLsd()[0].map(num => num);
+                    lsd = this.getHexMsdAndLsd()[1].map(num => num);
+                }
             } else if (this.ifLsd()) {
-                lsd = this.getMsdAndLsd().map(num => Number(num));
+                if (notHex) {
+                    lsd = this.getMsdAndLsd().map(num => Number(num));
+                } else {
+                    lsd = this.getHexMsdAndLsd().map(num => num);
+                }
             } else {
-                msd = this.getMsdAndLsd().map(num => Number(num));
+                if (notHex) {
+                    msd = this.getMsdAndLsd().map(num => Number(num));
+                } else {
+                    msd = this.getHexMsdAndLsd().map(num => num);
+                }
             }
 
             let finalMsd
@@ -59,6 +73,7 @@ class NumberSystem {
                     return num * Math.pow(base, (Math.abs(index - (msd.length - 1))))
                 }).reduce((total, value) => total + value);
             }
+
 
             let finalLsd;
             if (checkFraction || this.ifLsd()) {
@@ -153,24 +168,57 @@ class HexToDecimal extends NumberSystem {
         const pattern = /[a-z]/g;
         const data = this.data;
 
-        return pattern.test(data)
-        return data.match(pattern)
+        if (pattern.test(data)) {
+            return true;
+        } else {
+            return false
+        }
 
     }
 
-    getHexMsd() {
-        const data = this.getData();
+    getHexMsdAndLsd() {
+        if (this.data) {
+            const given = this.getData();
+            const msdPattern = /\w+/
+            const lsdPattern = /[.]\w+/ 
+            
+            let convertedMsd = [];
+            const msd = given.match(msdPattern)[0].split('').forEach(char => {
+                if(this.hexTable[char]) {
+                    convertedMsd.push(Number(this.hexTable[char]))
+                } else {
+                    convertedMsd.push(Number(char))
+                }
+            });
 
 
+            if (given.indexOf('.') > 0) {
+                let convertedLsd = [];
+                const lsd = given.match(lsdPattern)[0].replace('.','').split('').forEach(char => {
+                    if (this.hexTable[char]) {
+                        convertedLsd.push(Number(this.hexTable[char]))
+                        
+                    } else {
+                        convertedLsd.push(Number(char))
+                    }
+                });
+                return [convertedMsd, convertedLsd]
+            } else {
+                return convertedMsd;
+            }
+        } else {
+            return `provide a valid ${this.numberSystem} number`
+        }
     }
     
-    getHexLsd() {
-        const data = this.getData();
-        const pattern = /\w+/g
-
-        console.log(data.match(pattern))
-
+    convertToDecimal() {
+        if (this.validate()) {
+            return this.toDecimal(16)
+        } else {
+            return `Not a valid ${this.numberSystem} number.`
+        }
     }
+
 }
 
 
@@ -180,12 +228,12 @@ class HexToDecimal extends NumberSystem {
 
 // To Hexadecimal
 
-const hex = new HexToDecimal('hexadecimal', '1abf.3c')
+const hex = new HexToDecimal('hexadecimal', 'f')
 const binary = new BinaryToDecimal('binary', '100110.01010')
 const octal = new OctalToDecimal('octal', '135.62')
 
-// console.log(hex.getHexMsd())
-console.log(hex.getHexLsd())
+console.log("msdAndLsd:", hex.getHexMsdAndLsd())
+console.log(hex.convertToDecimal())
 // console.log(binary.convertToDecimal())
 // console.log(octal.convertToDecimal())
 
