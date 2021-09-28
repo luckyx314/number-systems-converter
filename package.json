@@ -4,6 +4,7 @@
   "private": true,
   "author": "LuckyJones",
   "main": "./public/electron.js",
+  "type": "module",
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",

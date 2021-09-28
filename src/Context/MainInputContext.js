@@ -4,7 +4,7 @@ export const MainInputContext = createContext();
 
 export const MainInputProvider = props => {
     const [inputValue, setInputValue] = useState({
-        value: ''
+        data: ''
     });
 
     return (

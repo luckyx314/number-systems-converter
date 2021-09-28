@@ -20,9 +20,9 @@ export const ConversionResultProvider = props => {
             base: 2
         },
         {
-            type: 'decimal',
+            type: 'octal',
             data: '',
-            base: 10
+            base: 8
         },
         {
             type: 'hexadecimal',
@@ -30,10 +30,11 @@ export const ConversionResultProvider = props => {
             base: 16
         },
         {
-            type: 'octal',
+            type: 'decimal',
             data: '',
-            base: 8
+            base: 10
         },
+        
         
     ])
     return (
