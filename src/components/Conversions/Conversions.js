@@ -11,63 +11,71 @@ import ConversionOptions from '../ConversionOptions/ConversionOptions'
 // contexts
 import {NumberSystemContext} from '../../Context/NumberSystemContext'
 import {MainInputContext} from '../../Context/MainInputContext'
-import {ConversionResultContext} from '../../Context/ConversionResultsContext'
+import {BinaryResultContext} from '../../Context/BinaryResultContext'
+import {OctalResultContext} from '../../Context/OctalResultContext'
+import {HexResultContext} from '../../Context/HexResultContext'
+import {DecimalResultContext} from '../../Context/DecimalResultContext'
 
 // my modules
-import {BinaryToDecimal, HexToDecimal, OctalToDecimal} from "../logic/toDecimal"
+import {
+    NumberSystem,
+    BinaryToDecimal,
+    HexToDecimal,
+    OctalToDecimal
+} from '../logic/toDecimal';
 
 const Conversions = () => {
     const [systemType] = useContext(NumberSystemContext);
-    const [inputValue] = useContext(MainInputContext);
-    const [,setConversionResults] = useContext(ConversionResultContext);
+    const [inputVal, setInputVal] = useContext(MainInputContext);
+    const [,setBinaryResult] = useContext(BinaryResultContext)
+    const [,setHexResult] = useContext(HexResultContext)
+    const [,setOctalResult] = useContext(OctalResultContext)
+    const [,setDecimalResult] = useContext(DecimalResultContext)
+
 
     const handleConvert = () => {
-        if (inputValue.data) {
-            if (systemType.finalSystemType === 'decimal') {
-                const binary = new BinaryToDecimal('binary', inputValue.data)
-                setConversionResults([
-                    {
-                        type: 'binary',
-                        data: '',
-                        base: 2
-                    },
-                    {
-                        type: '1\'s compliment',
-                        data: '',
-                        base: 2
-                    },
-                    {
-                        type: '2\'s compliment',
-                        data: '',
-                        base: 2
-                    },
-                    {
-                        type: 'octal',
-                        data: '',
-                        base: 8
-                    },
-                    {
-                        type: 'hexadecimal',
-                        data: '',
-                        base: 16
-                    },
-                    {
-                        type: 'decimal',
-                        data: binary.covertToDecimal(),
-                        base: 10
-                    }
-                ])
-
-            } else {
-                console.log(false)
-            } 
-        } else {
-            console.log('Enter a value.')
+        switch(systemType.initialSystemType) {
+            case 'decimal':
+                const numInput = Number(inputVal);
+                setBinaryResult(numInput.toString(2))
+                setHexResult(numInput.toString(16))
+                setOctalResult(numInput.toString(8))
+                setDecimalResult(numInput.toString(10))
+                break
+            case 'binary':
+                const binToDeci = new BinaryToDecimal('binary', inputVal);
+                const finalDeci = binToDeci.convertToDecimal();
+                setBinaryResult(inputVal)
+                setHexResult(finalDeci.toString(16))
+                setOctalResult(finalDeci.toString(8))
+                setDecimalResult(finalDeci.toString(10))
+                break
+            case 'octal':
+                const octNum = new OctalToDecimal('octal', inputVal);
+                const convertedOctToDeci = octNum.convertToDecimal()
+                setBinaryResult(convertedOctToDeci.toString(2))
+                setHexResult(convertedOctToDeci.toString(16))
+                setOctalResult(inputVal)
+                setDecimalResult(convertedOctToDeci.toString(10))
+                break
+            case 'hexadecimal':
+                const hexNum = new HexToDecimal('hexadecimal', inputVal.toString());
+                const convertedHexToDeci = hexNum.convertToDecimal()
+                setBinaryResult(convertedHexToDeci.toString(2))
+                setHexResult(inputVal.toString())
+                setOctalResult(convertedHexToDeci.toString(8))
+                setDecimalResult(convertedHexToDeci.toString(10))
+                break
+            default:
+                return
         }
-        
     }
+
     const handleReset = () => {
-        console.log('reset')
+        setBinaryResult(0)
+        setHexResult(0)
+        setOctalResult(0)
+        setDecimalResult(0)
     }
     const handleSwap = () => {
         console.log('swap')

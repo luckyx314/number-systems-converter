@@ -165,7 +165,7 @@ class HexToDecimal extends NumberSystem {
     }
 
     validate() {
-        const pattern = /[a-z]/g;
+        const pattern = /[0-9|a-z]/g;
         const data = this.data;
 
         if (pattern.test(data)) {
@@ -220,22 +220,6 @@ class HexToDecimal extends NumberSystem {
     }
 
 }
-
-
-// To Octal
-
-// To Binary
-
-// To Hexadecimal
-
-const hex = new HexToDecimal('hexadecimal', 'f')
-const binary = new BinaryToDecimal('binary', '100110.01010')
-const octal = new OctalToDecimal('octal', '135.62')
-
-console.log("msdAndLsd:", hex.getHexMsdAndLsd())
-console.log(hex.convertToDecimal())
-// console.log(binary.convertToDecimal())
-// console.log(octal.convertToDecimal())
 
 export {
     NumberSystem,

@@ -10,7 +10,7 @@ const ConversionOptions = () => {
                 <div className="fromBaseN">
                     <p>From</p>
                     <select
-                        onClick={(e) => setSystemType({...systemType, initialSystemType: e.target.value})}
+                        onChange={(e) => setSystemType({...systemType, initialSystemType: e.target.value})}
                     >
                         <option value="binary">Binary</option>
                         <option value="decimal">Decimal</option>
@@ -21,7 +21,7 @@ const ConversionOptions = () => {
                 <div className="toBaseN">
                     <p>To</p>
                     <select
-                        onClick={(e) => setSystemType({...systemType, finalSystemType: e.target.value})}
+                        onChange={(e) => setSystemType({...systemType, finalSystemType: e.target.value})}
                     >
                         <option value="decimal">Decimal</option>
                         <option value="binary">Binary</option>
