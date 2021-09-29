@@ -178,7 +178,7 @@ class HexToDecimal extends NumberSystem {
 
     getHexMsdAndLsd() {
         if (this.data) {
-            const given = this.getData();
+            const given = this.getData().toLowerCase();
             const msdPattern = /\w+/
             const lsdPattern = /[.]\w+/ 
             
@@ -220,6 +220,8 @@ class HexToDecimal extends NumberSystem {
     }
 
 }
+
+
 
 export {
     NumberSystem,

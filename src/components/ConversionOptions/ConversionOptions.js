@@ -18,7 +18,7 @@ const ConversionOptions = () => {
                         <option value="octal">Octal</option>
                     </select>
                 </div>
-                <div className="toBaseN">
+                {/* <div className="toBaseN">
                     <p>To</p>
                     <select
                         onChange={(e) => setSystemType({...systemType, finalSystemType: e.target.value})}
@@ -28,7 +28,7 @@ const ConversionOptions = () => {
                         <option value="hexadecimal">Hexadecimal</option>
                         <option value="octal">Octal</option>
                     </select>
-                </div>
+                </div> */}
             </div>
     )
 }

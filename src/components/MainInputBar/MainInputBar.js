@@ -5,7 +5,7 @@ const MainInputBar = () => {
     const [,setInputValue] = useContext(MainInputContext);
     return (
         <div>
-            <input type="text" onChange={(e) => setInputValue(e.target.value)} />
+            <input type="text" onChange={(e) => setInputValue(e.target.value)}/>
         </div>
     )
 }
