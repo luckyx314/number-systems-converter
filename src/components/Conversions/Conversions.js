@@ -37,38 +37,34 @@ const Conversions = () => {
         switch(systemType.initialSystemType) {
             case 'decimal':
                 const numInput = Number(inputVal);
-                setBinaryResult(numInput.toString(2))
-                setHexResult(numInput.toString(16))
-                setOctalResult(numInput.toString(8))
-                setDecimalResult(numInput.toString(10))
+                handleConversions(numInput, 2,8,10,16)
                 break
             case 'binary':
                 const binToDeci = new BinaryToDecimal('binary', inputVal);
                 const finalDeci = binToDeci.convertToDecimal();
-                setBinaryResult(inputVal)
-                setHexResult(finalDeci.toString(16))
-                setOctalResult(finalDeci.toString(8))
-                setDecimalResult(finalDeci.toString(10))
+                handleConversions(finalDeci, 2,8,10,16)
+
                 break
             case 'octal':
                 const octNum = new OctalToDecimal('octal', inputVal);
                 const convertedOctToDeci = octNum.convertToDecimal()
-                setBinaryResult(convertedOctToDeci.toString(2))
-                setHexResult(convertedOctToDeci.toString(16))
-                setOctalResult(inputVal)
-                setDecimalResult(convertedOctToDeci.toString(10))
+                handleConversions(convertedOctToDeci, 2,8,10,16)
                 break
             case 'hexadecimal':
                 const hexNum = new HexToDecimal('hexadecimal', inputVal.toString());
                 const convertedHexToDeci = hexNum.convertToDecimal()
-                setBinaryResult(convertedHexToDeci.toString(2))
-                setHexResult(inputVal.toString())
-                setOctalResult(convertedHexToDeci.toString(8))
-                setDecimalResult(convertedHexToDeci.toString(10))
+                handleConversions(convertedHexToDeci, 2,8,10,16)
                 break
             default:
                 return
         }
+    }
+
+    function handleConversions (decimalNum, binBase, octBase, deciBase, hexBase) {
+        setBinaryResult(decimalNum.toString(binBase))
+        setHexResult(decimalNum.toString(hexBase))
+        setOctalResult(decimalNum.toString(octBase))
+        setDecimalResult(decimalNum.toString(deciBase))
     }
 
     const handleReset = () => {
